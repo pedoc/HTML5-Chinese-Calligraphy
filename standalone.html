@@ -9,9 +9,10 @@
     :root{color-scheme:light;--ink:#27241f;--muted:#888176;--line:#e3ddd2;--accent:#8e4d35;--paper:#fffefa;font-family:"Noto Serif SC","Songti SC","SimSun",serif}
     *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;color:var(--ink);background:#eee9df}
     button,input{font:inherit}button{cursor:pointer}.app{max-width:1540px;min-height:100vh;margin:auto;padding:0 40px;display:flex;flex-direction:column}
-    header{height:76px;flex:none;display:flex;align-items:center;gap:22px;border-bottom:1px solid #dcd5c9}.title{display:flex;align-items:center;gap:12px}.seal{width:37px;height:37px;border:1px solid #864c37;border-radius:3px;display:grid;place-items:center;color:#864c37;font-size:21px}.title h1{font-size:17px;font-weight:500;letter-spacing:.12em;margin:0}.title p{margin:4px 0 0;color:var(--muted);font:10px/1.2 system-ui,sans-serif;letter-spacing:.06em}.header-actions{margin-left:auto;display:flex;gap:7px}.button{height:35px;padding:0 12px;border:1px solid #dcd5c9;border-radius:5px;background:#f8f5ef;color:#504a40;font-size:12px;display:flex;align-items:center;gap:7px}.button:hover:not(:disabled){border-color:#ad8066;color:#75412e;background:#fffdf8}.button:disabled{opacity:.4;cursor:default}.button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:20px;padding:22px 0 18px}.paper-wrap{min-height:420px;position:relative;border:1px solid #dcd5c9;background:var(--paper);box-shadow:0 8px 26px #4035210d;overflow:hidden;touch-action:none}.paper-wrap:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E")}.paper-wrap canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.paper-note{position:absolute;z-index:2;right:14px;bottom:12px;color:#c5beb2;font:10px system-ui,sans-serif;letter-spacing:.1em;pointer-events:none}.panel{padding:17px 16px;border:1px solid #ddd6ca;background:#f7f4ee;align-self:start}.panel h2{margin:0 0 16px;font-size:13px;font-weight:500;letter-spacing:.08em}.control{display:block;padding:13px 0;border-top:1px solid #e6e0d6}.label-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px}.label-row output{color:var(--accent);font:12px system-ui,sans-serif;font-variant-numeric:tabular-nums}.control small{display:block;margin-top:4px;color:#999184;font:10px system-ui,sans-serif}.control input[type=range]{display:block;width:100%;margin:15px 0 4px;accent-color:#8e4d35}.range-ends{display:flex;justify-content:space-between;color:#aaa397;font:9px system-ui,sans-serif}.color-row{display:flex;justify-content:space-between;align-items:center}.color-row input{width:29px;height:29px;padding:2px;border:1px solid #d8d0c4;border-radius:50%;background:transparent}.color-row input::-webkit-color-swatch-wrapper{padding:0}.color-row input::-webkit-color-swatch{border:0;border-radius:50%}.tip{margin-top:14px;padding:10px;background:#eee8dd;color:#766e61;font:10px/1.6 system-ui,sans-serif}.footer{height:32px;display:flex;align-items:center;justify-content:space-between;color:#91897c;font:10px system-ui,sans-serif;letter-spacing:.04em}
+    header{height:76px;flex:none;display:flex;align-items:center;gap:22px;border-bottom:1px solid #dcd5c9}.title{display:flex;align-items:center;gap:12px}.seal{width:37px;height:37px;border:1px solid #864c37;border-radius:3px;display:grid;place-items:center;color:#864c37;font-size:21px}.title h1{font-size:17px;font-weight:500;letter-spacing:.12em;margin:0}.title p{margin:4px 0 0;color:var(--muted);font:10px/1.2 system-ui,sans-serif;letter-spacing:.06em}.header-actions{margin-left:auto;display:flex;gap:7px}.button{height:35px;padding:0 12px;border:1px solid #dcd5c9;border-radius:5px;background:#f8f5ef;color:#504a40;font-size:12px;display:flex;align-items:center;gap:7px}.button:hover:not(:disabled){border-color:#ad8066;color:#75412e;background:#fffdf8}.button:disabled{opacity:.4;cursor:default}.button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:20px;padding:22px 0 18px}.paper-wrap{height:calc(100vh - 148px);min-height:420px;position:relative;border:1px solid #dcd5c9;background:var(--paper);box-shadow:0 8px 26px #4035210d;overflow:hidden;touch-action:none}.paper-wrap:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E")}.paper-wrap canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.paper-note{position:absolute;z-index:2;right:14px;bottom:12px;color:#c5beb2;font:10px system-ui,sans-serif;letter-spacing:.1em;pointer-events:none}.panel{padding:17px 16px;border:1px solid #ddd6ca;background:#f7f4ee;align-self:start}.panel h2{margin:0 0 16px;font-size:13px;font-weight:500;letter-spacing:.08em}.control{display:block;padding:13px 0;border-top:1px solid #e6e0d6}.label-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px}.label-row output{color:var(--accent);font:12px system-ui,sans-serif;font-variant-numeric:tabular-nums}.control small{display:block;margin-top:4px;color:#999184;font:10px system-ui,sans-serif}.control input[type=range]{display:block;width:100%;margin:15px 0 4px;accent-color:#8e4d35}.range-ends{display:flex;justify-content:space-between;color:#aaa397;font:9px system-ui,sans-serif}.color-row{display:flex;justify-content:space-between;align-items:center}.color-row input{width:29px;height:29px;padding:2px;border:1px solid #d8d0c4;border-radius:50%;background:transparent}.color-row input::-webkit-color-swatch-wrapper{padding:0}.color-row input::-webkit-color-swatch{border:0;border-radius:50%}.tip{margin-top:14px;padding:10px;background:#eee8dd;color:#766e61;font:10px/1.6 system-ui,sans-serif}.footer{height:32px;display:flex;align-items:center;justify-content:space-between;color:#91897c;font:10px system-ui,sans-serif;letter-spacing:.04em}
     .select-control select{display:block;width:100%;height:36px;margin-top:10px;padding:0 10px;border:1px solid #d8d0c4;border-radius:4px;background:#fffdf8;color:#4d463c;font:11px system-ui,sans-serif}.select-control select:focus-visible,.button:focus-visible,.control input:focus-visible,.advanced summary:focus-visible{outline:2px solid #9b6148;outline-offset:2px}.advanced{border-top:1px solid #e6e0d6}.advanced summary{padding:14px 0;cursor:pointer;color:#5f5245;font-size:11px;list-style:none;display:flex;justify-content:space-between}.advanced summary:after{content:"＋";color:#8e4d35}.advanced[open] summary:after{content:"－"}.advanced .control:first-of-type{border-top:0}.advanced .control{padding:10px 0}.paper-control{margin-top:4px}
-    @media(max-width:760px){.app{padding:0 16px}header{height:64px;gap:10px}.title h1{font-size:15px}.title p{font-size:9px}.button{width:35px;padding:0;justify-content:center}.button span{display:none}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto;gap:12px;padding:13px 0}.paper-wrap{min-height:42vh}.panel{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.panel h2{grid-column:1/-1;margin-bottom:5px}.control{padding:10px 0}.preset-control,.advanced,.paper-control{grid-column:1/-1}.control:nth-of-type(4){border-top:1px solid #e6e0d6}.tip{display:none}.footer{font-size:9px}}
+    .preset-hint{margin:-4px 0 8px;color:#817568;font:10px/1.6 system-ui,sans-serif}.preset-hint strong{font-weight:600;color:#81543f}
+    @media(max-width:760px){.app{padding:0 16px}header{height:64px;gap:10px}.title h1{font-size:15px}.title p{font-size:9px}.button{width:35px;padding:0;justify-content:center}.button span{display:none}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto;gap:12px;padding:13px 0}.paper-wrap{height:auto;min-height:42vh}.panel{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.panel h2{grid-column:1/-1;margin-bottom:5px}.control{padding:10px 0}.preset-control,.preset-hint,.advanced,.paper-control{grid-column:1/-1}.control:nth-of-type(4){border-top:1px solid #e6e0d6}.tip{display:none}.footer{font-size:9px}}
     @media(max-width:430px){.workspace{grid-template-rows:minmax(300px,1fr) auto}.panel{grid-template-columns:1fr 1fr;gap:0 12px}.label-row{font-size:10px}.control small{font-size:9px}}
   </style>
 </head>
@@ -34,7 +35,11 @@
       </div>
       <aside class="panel" aria-label="笔刷参数">
         <h2>笔刷参数</h2>
-        <label class="control select-control preset-control" for="preset"><span class="label-row">笔刷预设</span><select id="preset"><option value="balanced">均衡狼毫</option><option value="soft">柔软羊毫</option><option value="dry-brush">枯笔飞白</option><option value="line">硬毫勾线</option><option value="custom">自定义</option></select></label>
+        <label class="control select-control preset-control" for="preset"><span class="label-row">笔刷预设</span><select id="preset">
+          <optgroup label="基础笔刷"><option value="balanced">均衡狼毫</option><option value="soft">柔软羊毫</option><option value="dry-brush">枯笔飞白</option><option value="line">硬毫勾线</option><option value="custom">自定义</option></optgroup>
+          <optgroup label="名家笔意 · 取意模拟"><option value="wang">王羲之 · 行书取意</option><option value="yan">颜真卿 · 楷书取意</option><option value="liu">柳公权 · 楷书取意</option><option value="mi">米芾 · 行书取意</option></optgroup>
+        </select></label>
+        <p class="preset-hint" id="preset-hint" aria-live="polite">均衡的基础笔性；名家选项仅模拟笔触，不生成原帖字形。</p>
         <label class="control" for="size"><span class="label-row"><span>笔锋粗细</span><output id="size-out">32</output></span><small>运笔速度会自然影响线宽</small><input id="size" type="range" min="10" max="64" value="32"><span class="range-ends"><span>细锋</span><span>重笔</span></span></label>
         <label class="control" for="density"><span class="label-row"><span>墨色浓淡</span><output id="density-out">92%</output></span><small>控制墨迹覆盖与叠色</small><input id="density" type="range" min="45" max="100" value="92"><span class="range-ends"><span>淡</span><span>浓</span></span></label>
         <label class="control" for="dry"><span class="label-row"><span>笔锋干湿</span><output id="dry-out">28%</output></span><small>干笔丝纹与飞白程度</small><input id="dry" type="range" min="0" max="100" value="28"><span class="range-ends"><span>润</span><span>枯</span></span></label>
@@ -46,7 +51,7 @@
           <label class="control" for="texture"><span class="label-row"><span>丝纹强度</span><output id="texture-out">50%</output></span><small>调整笔毫分叉与飞白细节</small><input id="texture" type="range" min="0" max="100" value="50"></label>
         </details>
         <label class="control select-control paper-control" for="paper-tone"><span class="label-row">纸张底色</span><select id="paper-tone"><option value="white">白宣</option><option value="warm">暖宣</option><option value="gray">灰宣</option></select></label>
-        <div class="tip">设置仅影响新笔画；数位笔可使用压力。鼠标和触屏也会模拟运笔轻重。</div>
+        <div class="tip">设置仅影响新笔画。名家预设是笔触参数的取意，不临摹字形；结构与章法仍取决于你的书写。</div>
       </aside>
     </section>
     <footer class="footer"><span id="status">按住画布即可书写</span><span>独立单文件 · 不依赖网络资源</span></footer>
@@ -64,6 +69,7 @@
       const dryInput = document.querySelector('#dry');
       const colorInput = document.querySelector('#color');
       const presetInput = document.querySelector('#preset');
+      const presetHint = document.querySelector('#preset-hint');
       const speedInput = document.querySelector('#speed');
       const taperInput = document.querySelector('#taper');
       const smoothingInput = document.querySelector('#smoothing');
@@ -86,7 +92,34 @@
         soft: { size: 46, density: 84, dry: 12, speed: 40, taper: 40, smoothing: 60, texture: 25 },
         'dry-brush': { size: 40, density: 78, dry: 86, speed: 74, taper: 88, smoothing: 20, texture: 90 },
         line: { size: 16, density: 96, dry: 15, speed: 82, taper: 96, smoothing: 55, texture: 18 },
+        wang: { size: 16, density: 88, dry: 20, speed: 68, taper: 82, smoothing: 58, texture: 30 },
+        yan: { size: 23, density: 98, dry: 12, speed: 38, taper: 32, smoothing: 54, texture: 18 },
+        liu: { size: 11, density: 96, dry: 20, speed: 82, taper: 94, smoothing: 45, texture: 25 },
+        mi: { size: 18, density: 86, dry: 60, speed: 90, taper: 85, smoothing: 20, texture: 78 },
       };
+      const profileModels = {
+        neutral: { angular: 0, weight: 1, rhythm: 0, side: 0, edge: 1, fiber: 1, response: 1, ink: 1, blur: 1 },
+        wang: { angular: 0, weight: .95, rhythm: .045, side: .06, edge: .75, fiber: .7, response: 1.05, ink: 1, blur: .85 },
+        yan: { angular: .08, weight: 1.12, rhythm: .018, side: .02, edge: .6, fiber: .45, response: .8, ink: 1.08, blur: 1.2 },
+        liu: { angular: .45, weight: .84, rhythm: .05, side: .08, edge: .65, fiber: .7, response: 1.18, ink: 1, blur: .65 },
+        mi: { angular: .2, weight: 1.04, rhythm: .11, side: .18, edge: 1.35, fiber: 1.3, response: 1.28, ink: .95, blur: .8 },
+      };
+      const presetLabels = {
+        balanced: '均衡狼毫', soft: '柔软羊毫', 'dry-brush': '枯笔飞白', line: '硬毫勾线',
+        wang: '王羲之取意', yan: '颜真卿取意', liu: '柳公权取意', mi: '米芾取意',
+      };
+      const presetDescriptions = {
+        balanced: '均衡的基础笔性；名家选项仅模拟笔触，不生成原帖字形。',
+        soft: '宽厚柔和，适合缓慢铺墨。',
+        'dry-brush': '干笔丝纹较多，适合表现飞白。',
+        line: '细锋收笔，适合清晰勾线。',
+        wang: '王羲之取意：连贯轻盈，线宽柔和起伏。',
+        yan: '颜真卿取意：厚重宽博，起收锋较圆。',
+        liu: '柳公权取意：清劲瘦挺，转折更利落。',
+        mi: '米芾取意：偏锋与线宽起伏更明显。',
+      };
+      let basePreset = 'balanced';
+      let activeProfile = 'neutral';
       const strokes = [];
       const undoHistory = [];
       const redoHistory = [];
@@ -135,7 +168,7 @@
         const t2 = t * t, t3 = t2 * t;
         return 0.5 * (2 * b + (-a + c) * t + (2 * a - 5 * b + 4 * c - d) * t2 + (-a + 3 * b - 3 * c + d) * t3);
       }
-      function smoothSamples(points, width, height) {
+      function smoothSamples(points, width, height, angularity = 0) {
         const source = points.map(p => ({ ...p, x: p.x * width, y: p.y * height }));
         if (source.length === 1) return source;
         const result = [];
@@ -146,8 +179,8 @@
           for (let j = 0; j < steps; j++) {
             const t = j / steps;
             result.push({
-              x: interpolate(p0.x, p1.x, p2.x, p3.x, t),
-              y: interpolate(p0.y, p1.y, p2.y, p3.y, t),
+              x: lerp(interpolate(p0.x, p1.x, p2.x, p3.x, t), lerp(p1.x, p2.x, t), angularity),
+              y: lerp(interpolate(p0.y, p1.y, p2.y, p3.y, t), lerp(p1.y, p2.y, t), angularity),
               pressure: lerp(p1.pressure, p2.pressure, t),
               time: lerp(p1.time, p2.time, t),
             });
@@ -157,15 +190,16 @@
         return result;
       }
       function paintStroke(context, stroke, width, height) {
-        const points = smoothSamples(stroke.points, width, height);
+        const profile = profileModels[stroke.profile] || profileModels.neutral;
+        const points = smoothSamples(stroke.points, width, height, profile.angular);
         if (!points.length) return;
         const random = randomFor(stroke.seed);
         if (points.length === 1) {
           context.save();
-          context.globalAlpha = stroke.density;
+          context.globalAlpha = clamp(stroke.density * profile.ink, 0, 1);
           context.fillStyle = stroke.color;
           context.beginPath();
-          context.arc(points[0].x, points[0].y, stroke.size * 0.34, 0, Math.PI * 2);
+          context.arc(points[0].x, points[0].y, stroke.size * profile.weight * 0.34, 0, Math.PI * 2);
           context.fill();
           context.restore();
           return;
@@ -173,15 +207,16 @@
         const widthAt = index => {
           const p = points[index], before = points[Math.max(0, index - 1)], after = points[Math.min(points.length - 1, index + 1)];
           const speed = Math.hypot(after.x - before.x, after.y - before.y) / Math.max(7, after.time - before.time);
-          const speedWidth = clamp(1.12 - speed * 0.3 * stroke.speed, 0.48, 1.2);
-          // A low-pressure pen should leave a genuinely fine trace instead of a flat ribbon.
-          const pressureWidth = 0.20 + p.pressure * 1.54;
+          const speedWidth = clamp(1.12 - speed * 0.3 * stroke.speed * profile.response, 0.48, 1.2);
+          // Historic-inspired profiles affect weight and rhythm, not the user's character shapes.
+          const pressureWidth = (0.20 + p.pressure * 1.54) * profile.weight;
           const progress = index / (points.length - 1);
           const tip = smooth(clamp(Math.min(progress, 1 - progress) / 0.12, 0, 1));
           // A curved response leaves the middle full, but lets the brush actually lift off at the ends.
           const taperAmount = 1 - Math.pow(1 - stroke.taper, 2);
           const taper = lerp(1, 0.035 + 0.965 * tip, taperAmount);
-          return Math.max(1, stroke.size * speedWidth * pressureWidth * taper);
+          const rhythm = 1 + profile.rhythm * (Math.sin(progress * 17 + stroke.seed * .6) + .4 * Math.sin(progress * 37));
+          return Math.max(1, stroke.size * speedWidth * pressureWidth * taper * rhythm);
         };
         const left = [], right = [];
         for (let i = 0; i < points.length; i++) {
@@ -190,15 +225,16 @@
           const length = Math.hypot(tx, ty) || 1;
           tx /= length; ty /= length;
           const half = widthAt(i) * 0.5;
-          const edgeNoise = (random() - 0.5) * (0.2 + stroke.texture * (0.4 + stroke.dry * 1.5));
-          left.push({ x: p.x - ty * (half + edgeNoise), y: p.y + tx * (half + edgeNoise) });
-          right.push({ x: p.x + ty * (half - edgeNoise), y: p.y - tx * (half - edgeNoise) });
+          const edgeNoise = (random() - 0.5) * (0.2 + stroke.texture * (0.4 + stroke.dry * 1.5)) * profile.edge;
+          const side = profile.side * Math.sin(Math.atan2(ty, tx) + .7 + i * .035);
+          left.push({ x: p.x - ty * (half * (1 + side) + edgeNoise), y: p.y + tx * (half * (1 + side) + edgeNoise) });
+          right.push({ x: p.x + ty * (half * (1 - side) - edgeNoise), y: p.y - tx * (half * (1 - side) - edgeNoise) });
         }
         context.save();
-        context.globalAlpha = stroke.density;
+        context.globalAlpha = clamp(stroke.density * profile.ink, 0, 1);
         context.fillStyle = stroke.color;
         context.shadowColor = `${stroke.color}30`;
-        context.shadowBlur = 1.2 + stroke.wet * 2.4;
+        context.shadowBlur = (1.2 + stroke.wet * 2.4) * profile.blur;
         context.beginPath();
         context.moveTo(left[0].x, left[0].y);
         for (let i = 1; i < left.length; i++) context.lineTo(left[i].x, left[i].y);
@@ -208,10 +244,10 @@
         context.restore();
 
         // Carved fine filaments suggest individual hairs and create restrained dry-brush fly-white.
-        const hairCount = Math.round((12 + stroke.dry * 34) * stroke.texture);
+        const hairCount = Math.round((12 + stroke.dry * 34) * stroke.texture * profile.fiber);
         context.save();
         context.globalCompositeOperation = 'destination-out';
-        context.globalAlpha = (0.025 + stroke.dry * 0.23) * stroke.texture;
+        context.globalAlpha = clamp((0.025 + stroke.dry * 0.23) * stroke.texture * profile.fiber, 0, 1);
         context.lineCap = 'round';
         for (let hair = 0; hair < hairCount; hair++) {
           const lane = random() * 1.65 - 0.825;
@@ -277,6 +313,7 @@
           taper: Number(taperInput.value) / 100,
           smoothing: Number(smoothingInput.value) / 100,
           texture: Number(textureInput.value) / 100,
+          profile: activeProfile,
           color: colorInput.value,
           seed: seed++,
         };
@@ -351,22 +388,33 @@
         colorInput.closest('.control').querySelector('small').textContent =
           colorInput.value === '#211d19' ? '松烟墨' : colorInput.value;
       }
-      for (const [input] of ranges) input.addEventListener('input', () => {
+      function updatePresetHint() {
+        presetHint.textContent = presetInput.value === 'custom'
+          ? `自定义 · 在「${presetLabels[basePreset]}」基础上微调，保留原笔性模型。`
+          : presetDescriptions[presetInput.value];
+      }
+      function markCustom() {
         presetInput.value = 'custom';
         syncControls();
-      });
-      colorInput.addEventListener('input', () => { presetInput.value = 'custom'; syncControls(); });
+        updatePresetHint();
+      }
+      for (const [input] of ranges) input.addEventListener('input', markCustom);
+      colorInput.addEventListener('input', markCustom);
       presetInput.addEventListener('change', () => {
         const preset = presets[presetInput.value];
-        if (!preset) return;
+        if (!preset) { updatePresetHint(); return; }
+        basePreset = presetInput.value;
+        activeProfile = profileModels[basePreset] ? basePreset : 'neutral';
         for (const [name, value] of Object.entries(preset)) document.querySelector(`#${name}`).value = value;
         colorInput.value = '#211d19';
         syncControls();
+        updatePresetHint();
       });
       paperToneInput.addEventListener('change', () => {
         paper.style.setProperty('--paper', paperColors[paperToneInput.value]);
       });
       syncControls();
+      updatePresetHint();
       new ResizeObserver(resize).observe(paper);
       window.addEventListener('resize', resize);
       resize();
