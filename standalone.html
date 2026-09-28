@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee9df">
+  <title>毛笔书写 · 独立实验版</title>
+  <style>
+    :root{color-scheme:light;--ink:#27241f;--muted:#888176;--line:#e3ddd2;--accent:#8e4d35;--paper:#fffefa;font-family:"Noto Serif SC","Songti SC","SimSun",serif}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;color:var(--ink);background:#eee9df}
+    button,input{font:inherit}button{cursor:pointer}.app{max-width:1540px;min-height:100vh;margin:auto;padding:0 40px;display:flex;flex-direction:column}
+    header{height:76px;flex:none;display:flex;align-items:center;gap:22px;border-bottom:1px solid #dcd5c9}.title{display:flex;align-items:center;gap:12px}.seal{width:37px;height:37px;border:1px solid #864c37;border-radius:3px;display:grid;place-items:center;color:#864c37;font-size:21px}.title h1{font-size:17px;font-weight:500;letter-spacing:.12em;margin:0}.title p{margin:4px 0 0;color:var(--muted);font:10px/1.2 system-ui,sans-serif;letter-spacing:.06em}.header-actions{margin-left:auto;display:flex;gap:7px}.button{height:35px;padding:0 12px;border:1px solid #dcd5c9;border-radius:5px;background:#f8f5ef;color:#504a40;font-size:12px;display:flex;align-items:center;gap:7px}.button:hover:not(:disabled){border-color:#ad8066;color:#75412e;background:#fffdf8}.button:disabled{opacity:.4;cursor:default}.button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:20px;padding:22px 0 18px}.paper-wrap{min-height:420px;position:relative;border:1px solid #dcd5c9;background:var(--paper);box-shadow:0 8px 26px #4035210d;overflow:hidden;touch-action:none}.paper-wrap:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E")}.paper-wrap canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.paper-note{position:absolute;z-index:2;right:14px;bottom:12px;color:#c5beb2;font:10px system-ui,sans-serif;letter-spacing:.1em;pointer-events:none}.panel{padding:17px 16px;border:1px solid #ddd6ca;background:#f7f4ee;align-self:start}.panel h2{margin:0 0 16px;font-size:13px;font-weight:500;letter-spacing:.08em}.control{display:block;padding:13px 0;border-top:1px solid #e6e0d6}.label-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px}.label-row output{color:var(--accent);font:12px system-ui,sans-serif;font-variant-numeric:tabular-nums}.control small{display:block;margin-top:4px;color:#999184;font:10px system-ui,sans-serif}.control input[type=range]{display:block;width:100%;margin:15px 0 4px;accent-color:#8e4d35}.range-ends{display:flex;justify-content:space-between;color:#aaa397;font:9px system-ui,sans-serif}.color-row{display:flex;justify-content:space-between;align-items:center}.color-row input{width:29px;height:29px;padding:2px;border:1px solid #d8d0c4;border-radius:50%;background:transparent}.color-row input::-webkit-color-swatch-wrapper{padding:0}.color-row input::-webkit-color-swatch{border:0;border-radius:50%}.tip{margin-top:14px;padding:10px;background:#eee8dd;color:#766e61;font:10px/1.6 system-ui,sans-serif}.footer{height:32px;display:flex;align-items:center;justify-content:space-between;color:#91897c;font:10px system-ui,sans-serif;letter-spacing:.04em}
+    @media(max-width:760px){.app{padding:0 16px}header{height:64px;gap:10px}.title h1{font-size:15px}.title p{font-size:9px}.button{width:35px;padding:0;justify-content:center}.button span{display:none}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto;gap:12px;padding:13px 0}.paper-wrap{min-height:42vh}.panel{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.panel h2{grid-column:1/-1;margin-bottom:5px}.control{padding:10px 0}.control:nth-of-type(4){border-top:1px solid #e6e0d6}.tip{display:none}.footer{font-size:9px}}
+    @media(max-width:430px){.workspace{grid-template-rows:minmax(300px,1fr) auto}.panel{grid-template-columns:1fr 1fr;gap:0 12px}.label-row{font-size:10px}.control small{font-size:9px}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="title"><span class="seal" aria-hidden="true">墨</span><div><h1>毛笔书写</h1><p>独立实验版 · 离线可用</p></div></div>
+      <div class="header-actions">
+        <button class="button" id="undo" title="撤销 Ctrl/⌘ Z" aria-label="撤销" disabled><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h9a7 7 0 0 1 0 14h-2"/></svg><span>撤销</span></button>
+        <button class="button" id="redo" title="重做 Ctrl/⌘ Shift Z" aria-label="重做" disabled><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5m5 5h-9a7 7 0 0 0 0 14h2"/></svg><span>重做</span></button>
+        <button class="button" id="clear" title="清空画布"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M5 7l1 13h12l1-13M9 7V4h6v3"/></svg><span>清空</span></button>
+        <button class="button" id="save" title="导出 PNG"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><span>导出</span></button>
+      </div>
+    </header>
+    <section class="workspace">
+      <div class="paper-wrap" id="paper" aria-label="毛笔书写区域">
+        <canvas id="ink" aria-label="已完成笔迹"></canvas>
+        <canvas id="draft" aria-label="当前笔迹"></canvas>
+        <span class="paper-note" id="count">0 笔</span>
+      </div>
+      <aside class="panel" aria-label="笔刷参数">
+        <h2>笔刷参数</h2>
+        <label class="control" for="size"><span class="label-row"><span>笔锋粗细</span><output id="size-out">32</output></span><small>运笔速度会自然影响线宽</small><input id="size" type="range" min="10" max="64" value="32"><span class="range-ends"><span>细锋</span><span>重笔</span></span></label>
+        <label class="control" for="density"><span class="label-row"><span>墨色浓淡</span><output id="density-out">92%</output></span><small>控制墨迹覆盖与叠色</small><input id="density" type="range" min="45" max="100" value="92"><span class="range-ends"><span>淡</span><span>浓</span></span></label>
+        <label class="control" for="dry"><span class="label-row"><span>笔锋干湿</span><output id="dry-out">28%</output></span><small>干笔丝纹与飞白程度</small><input id="dry" type="range" min="0" max="100" value="28"><span class="range-ends"><span>润</span><span>枯</span></span></label>
+        <label class="control color-row" for="color"><span><span class="label-row">墨色</span><small>松烟墨</small></span><input id="color" type="color" value="#211d19" aria-label="墨色"></label>
+        <div class="tip">提按与速度共同影响笔画宽度。数位笔可提供压力；鼠标和触屏也会模拟轻重变化。</div>
+      </aside>
+    </section>
+    <footer class="footer"><span id="status">按住画布即可书写</span><span>独立单文件 · 不依赖网络资源</span></footer>
+  </main>
+  <script>
+    (() => {
+      'use strict';
+      const paper = document.querySelector('#paper');
+      const inkCanvas = document.querySelector('#ink');
+      const draftCanvas = document.querySelector('#draft');
+      const ink = inkCanvas.getContext('2d');
+      const draft = draftCanvas.getContext('2d');
+      const sizeInput = document.querySelector('#size');
+      const densityInput = document.querySelector('#density');
+      const dryInput = document.querySelector('#dry');
+      const colorInput = document.querySelector('#color');
+      const sizeOut = document.querySelector('#size-out');
+      const densityOut = document.querySelector('#density-out');
+      const dryOut = document.querySelector('#dry-out');
+      const count = document.querySelector('#count');
+      const status = document.querySelector('#status');
+      const undoButton = document.querySelector('#undo');
+      const redoButton = document.querySelector('#redo');
+      const strokes = [];
+      const undoHistory = [];
+      const redoHistory = [];
+      let active = null;
+      let pointerId = null;
+      let ratio = 1;
+      let seed = 743;
+      let renderQueued = false;
+
+      const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const smooth = t => t * t * (3 - 2 * t);
+      function randomFor(seedValue) {
+        let state = seedValue >>> 0;
+        return () => ((state = (state * 1664525 + 1013904223) >>> 0) / 4294967296);
+      }
+      function canvasSize() {
+        const r = paper.getBoundingClientRect();
+        return { width: r.width, height: r.height };
+      }
+      function resize() {
+        const { width, height } = canvasSize();
+        ratio = Math.min(2, window.devicePixelRatio || 1);
+        for (const canvas of [inkCanvas, draftCanvas]) {
+          canvas.width = Math.max(1, Math.round(width * ratio));
+          canvas.height = Math.max(1, Math.round(height * ratio));
+        }
+        redraw();
+      }
+      function clearLayer(context) {
+        const { width, height } = canvasSize();
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        context.clearRect(0, 0, width, height);
+      }
+      function samplePoint(event) {
+        const rect = paper.getBoundingClientRect();
+        const pressure = event.pointerType === 'mouse' ? 0.52 : (event.pressure > 0 ? event.pressure : 0.48);
+        return {
+          x: clamp((event.clientX - rect.left) / rect.width, 0, 1),
+          y: clamp((event.clientY - rect.top) / rect.height, 0, 1),
+          pressure,
+          time: event.timeStamp,
+        };
+      }
+      function interpolate(a, b, c, d, t) {
+        const t2 = t * t, t3 = t2 * t;
+        return 0.5 * (2 * b + (-a + c) * t + (2 * a - 5 * b + 4 * c - d) * t2 + (-a + 3 * b - 3 * c + d) * t3);
+      }
+      function smoothSamples(points, width, height) {
+        const source = points.map(p => ({ ...p, x: p.x * width, y: p.y * height }));
+        if (source.length === 1) return source;
+        const result = [];
+        for (let i = 0; i < source.length - 1; i++) {
+          const p0 = source[Math.max(0, i - 1)], p1 = source[i];
+          const p2 = source[i + 1], p3 = source[Math.min(source.length - 1, i + 2)];
+          const steps = Math.max(2, Math.ceil(Math.hypot(p2.x - p1.x, p2.y - p1.y) / 2));
+          for (let j = 0; j < steps; j++) {
+            const t = j / steps;
+            result.push({
+              x: interpolate(p0.x, p1.x, p2.x, p3.x, t),
+              y: interpolate(p0.y, p1.y, p2.y, p3.y, t),
+              pressure: lerp(p1.pressure, p2.pressure, t),
+              time: lerp(p1.time, p2.time, t),
+            });
+          }
+        }
+        result.push(source.at(-1));
+        return result;
+      }
+      function paintStroke(context, stroke, width, height) {
+        const points = smoothSamples(stroke.points, width, height);
+        if (!points.length) return;
+        const random = randomFor(stroke.seed);
+        if (points.length === 1) {
+          context.save();
+          context.globalAlpha = stroke.density;
+          context.fillStyle = stroke.color;
+          context.beginPath();
+          context.arc(points[0].x, points[0].y, stroke.size * 0.34, 0, Math.PI * 2);
+          context.fill();
+          context.restore();
+          return;
+        }
+        const widthAt = index => {
+          const p = points[index], before = points[Math.max(0, index - 1)], after = points[Math.min(points.length - 1, index + 1)];
+          const speed = Math.hypot(after.x - before.x, after.y - before.y) / Math.max(7, after.time - before.time);
+          const speedWidth = clamp(1.18 - speed * 0.18, 0.54, 1.2);
+          const pressureWidth = 0.60 + p.pressure * 0.82;
+          const progress = index / (points.length - 1);
+          const taper = Math.min(1, 0.18 + progress / 0.075, 0.18 + (1 - progress) / 0.075);
+          return Math.max(1, stroke.size * speedWidth * pressureWidth * taper);
+        };
+        const left = [], right = [];
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i], before = points[Math.max(0, i - 1)], after = points[Math.min(points.length - 1, i + 1)];
+          let tx = after.x - before.x, ty = after.y - before.y;
+          const length = Math.hypot(tx, ty) || 1;
+          tx /= length; ty /= length;
+          const half = widthAt(i) * 0.5;
+          const edgeNoise = (random() - 0.5) * (0.35 + stroke.dry * 1.1);
+          left.push({ x: p.x - ty * (half + edgeNoise), y: p.y + tx * (half + edgeNoise) });
+          right.push({ x: p.x + ty * (half - edgeNoise), y: p.y - tx * (half - edgeNoise) });
+        }
+        context.save();
+        context.globalAlpha = stroke.density;
+        context.fillStyle = stroke.color;
+        context.shadowColor = `${stroke.color}30`;
+        context.shadowBlur = 1.2 + stroke.wet * 2.4;
+        context.beginPath();
+        context.moveTo(left[0].x, left[0].y);
+        for (let i = 1; i < left.length; i++) context.lineTo(left[i].x, left[i].y);
+        for (let i = right.length - 1; i >= 0; i--) context.lineTo(right[i].x, right[i].y);
+        context.closePath();
+        context.fill();
+        context.restore();
+
+        // Carved fine filaments suggest individual hairs and create restrained dry-brush fly-white.
+        const hairCount = Math.round(12 + stroke.dry * 34);
+        context.save();
+        context.globalCompositeOperation = 'destination-out';
+        context.globalAlpha = 0.025 + stroke.dry * 0.23;
+        context.lineCap = 'round';
+        for (let hair = 0; hair < hairCount; hair++) {
+          const lane = random() * 1.65 - 0.825;
+          const start = Math.floor(random() * Math.max(1, points.length - 2));
+          const span = Math.max(3, Math.floor(points.length * (0.12 + random() * 0.52)));
+          const end = Math.min(points.length - 1, start + span);
+          context.lineWidth = 0.35 + random() * (0.45 + stroke.dry * 1.1);
+          context.beginPath();
+          for (let i = start; i <= end; i++) {
+            const p = points[i], before = points[Math.max(0, i - 1)], after = points[Math.min(points.length - 1, i + 1)];
+            let tx = after.x - before.x, ty = after.y - before.y;
+            const length = Math.hypot(tx, ty) || 1;
+            tx /= length; ty /= length;
+            const offset = lane * widthAt(i) * 0.42;
+            const x = p.x - ty * offset, y = p.y + tx * offset;
+            if (i === start) context.moveTo(x, y); else context.lineTo(x, y);
+          }
+          context.stroke();
+        }
+        context.restore();
+      }
+      function redraw() {
+        const { width, height } = canvasSize();
+        clearLayer(ink); clearLayer(draft);
+        for (const stroke of strokes) paintStroke(ink, stroke, width, height);
+        if (active) paintStroke(draft, active, width, height);
+        count.textContent = `${strokes.length + (active ? 1 : 0)} 笔`;
+        undoButton.disabled = undoHistory.length === 0;
+        redoButton.disabled = redoHistory.length === 0;
+      }
+      function scheduleDraft() {
+        if (renderQueued) return;
+        renderQueued = true;
+        requestAnimationFrame(() => {
+          renderQueued = false;
+          clearLayer(draft);
+          if (active) {
+            const { width, height } = canvasSize();
+            paintStroke(draft, active, width, height);
+          }
+          count.textContent = `${strokes.length + (active ? 1 : 0)} 笔`;
+        });
+      }
+      paper.addEventListener('pointerdown', event => {
+        if (pointerId !== null || (event.pointerType === 'mouse' && event.button !== 0)) return;
+        event.preventDefault();
+        pointerId = event.pointerId;
+        paper.setPointerCapture(pointerId);
+        active = {
+          points: [samplePoint(event)],
+          size: Number(sizeInput.value),
+          density: Number(densityInput.value) / 100,
+          dry: Number(dryInput.value) / 100,
+          wet: 1 - Number(dryInput.value) / 100,
+          color: colorInput.value,
+          seed: seed++,
+        };
+        status.textContent = '正在书写…';
+        scheduleDraft();
+      });
+      paper.addEventListener('pointermove', event => {
+        if (event.pointerId !== pointerId || !active) return;
+        event.preventDefault();
+        const events = event.getCoalescedEvents?.() ?? [event];
+        for (const sample of events) {
+          const point = samplePoint(sample), last = active.points.at(-1);
+          if (Math.hypot(point.x - last.x, point.y - last.y) > 0.00045) active.points.push(point);
+        }
+        scheduleDraft();
+      });
+      function finish(event) {
+        if (event.pointerId !== pointerId || !active) return;
+        const point = samplePoint(event), last = active.points.at(-1);
+        if (Math.hypot(point.x - last.x, point.y - last.y) > 0.0001) active.points.push(point);
+        undoHistory.push(strokes.slice());
+        redoHistory.length = 0;
+        strokes.push(active);
+        active = null;
+        pointerId = null;
+        status.textContent = '按住画布即可书写';
+        redraw();
+      }
+      paper.addEventListener('pointerup', finish);
+      paper.addEventListener('pointercancel', finish);
+      function undo() {
+        if (!undoHistory.length) return;
+        redoHistory.push(strokes.slice());
+        strokes.splice(0, strokes.length, ...undoHistory.pop());
+        redraw();
+      }
+      function redo() {
+        if (!redoHistory.length) return;
+        undoHistory.push(strokes.slice());
+        strokes.splice(0, strokes.length, ...redoHistory.pop());
+        redraw();
+      }
+      undoButton.addEventListener('click', undo);
+      redoButton.addEventListener('click', redo);
+      document.querySelector('#clear').addEventListener('click', () => {
+        if (!strokes.length) return;
+        undoHistory.push(strokes.slice());
+        redoHistory.length = 0;
+        strokes.length = 0;
+        redraw();
+      });
+      document.addEventListener('keydown', event => {
+        if (!(event.ctrlKey || event.metaKey)) return;
+        if (event.key.toLowerCase() === 'z') { event.preventDefault(); event.shiftKey ? redo() : undo(); }
+        else if (event.key.toLowerCase() === 'y') { event.preventDefault(); redo(); }
+      });
+      document.querySelector('#save').addEventListener('click', () => {
+        const output = document.createElement('canvas');
+        output.width = inkCanvas.width; output.height = inkCanvas.height;
+        const context = output.getContext('2d');
+        context.fillStyle = '#fffefa'; context.fillRect(0, 0, output.width, output.height);
+        context.drawImage(inkCanvas, 0, 0); context.drawImage(draftCanvas, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'brush-writing.png'; link.href = output.toDataURL('image/png'); link.click();
+      });
+      function bindRange(input, output, suffix) {
+        const update = () => { output.value = `${input.value}${suffix}`; output.textContent = output.value; };
+        input.addEventListener('input', update); update();
+      }
+      bindRange(sizeInput, sizeOut, '');
+      bindRange(densityInput, densityOut, '%');
+      bindRange(dryInput, dryOut, '%');
+      colorInput.addEventListener('input', () => { colorInput.closest('.control').querySelector('small').textContent = colorInput.value; });
+      new ResizeObserver(resize).observe(paper);
+      window.addEventListener('resize', resize);
+      resize();
+    })();
+  </script>
+</body>
+</html>

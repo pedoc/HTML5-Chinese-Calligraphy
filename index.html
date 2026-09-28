@@ -143,33 +143,27 @@
                     //this._super()
                 },
                 mousedown: function (a, b, c, d) {
-                    //this._super(a, b);
-                    this.previousBrushSize = 0,
-                        this.brushUsing = null,
-                        this.splineBuffer = null,
-                        this.splineBuffer = [],
-                        this.drawStroke(a, b, c, d, false),
-                        this._lastPosition = {
-                            x: c,
-                            y: d
-                        },
-                        this._lastMoveTime = (new Date).getTime(),
-                        this.already = false;
+                    // Surface supplies canvas-local coordinates as a/b and page coordinates as c/d.
+                    // Keep the brush state in one coordinate space to avoid offset jumps.
+                    this.previousBrushSize = 0;
+                    this.brushUsing = null;
+                    this.splineBuffer = [];
+                    this._lastPosition = { x: a, y: b };
+                    this._lastMoveTime = Date.now();
+                    this.drawStroke(a, b, a, b, false);
+                    this.already = false;
                 },
                 mouseup: function (a, b, c, d) {
                     //this._super(a, b);
-                    this.drawStroke(this._lastPosition.x, this._lastPosition.y, a, b, true), this._lastPosition = {
-                        x: a,
-                        y: b
-                    }, this._lastMoveTime = (new Date).getTime();
+                    this.drawStroke(this._lastPosition.x, this._lastPosition.y, a, b, true);
+                    this._lastPosition = { x: a, y: b };
+                    this._lastMoveTime = Date.now();
                 },
                 mousemove: function (a, b, c, d) {
                     //this._super(a, b);
-
-                    this.drawStroke(this._lastPosition.x, this._lastPosition.y, a, b, false), this._lastPosition = {
-                        x: a,
-                        y: b
-                    }, this._lastMoveTime = (new Date).getTime();
+                    this.drawStroke(this._lastPosition.x, this._lastPosition.y, a, b, false);
+                    this._lastPosition = { x: a, y: b };
+                    this._lastMoveTime = Date.now();
                 },
                 mousehover: function (a, b) {
                     // this._super(a, b);//, this._drawPreviewAt(a, b)
@@ -192,96 +186,65 @@
                     return c * t / d + b;
                 },
                 drawStroke: function (x1, y1, x2, y2, brushEnded) {
-                    x1 -= this.config.offset.x;
-                    y1 -= this.config.offset.y;
-                    x2 -= this.config.offset.x;
-                    y2 -= this.config.offset.y;
+                    var dx = x2 - x1;
+                    var dy = y2 - y1;
+                    var distance = Math.sqrt(dx * dx + dy * dy);
+                    var now = Date.now();
+                    var elapsed = Math.max(8, now - (this._lastMoveTime || now));
+                    var minSize = Math.max(2, this.config.size.min);
+                    var maxSize = Math.max(minSize, this.config.size.max);
+                    var velocity = distance / elapsed;
+                    var brushSize = Math.max(minSize, Math.min(maxSize,
+                        this.curve(velocity, maxSize, -maxSize - minSize, 5)));
 
-                    /// <summary>Draw stroke line (Spline).</summary>
-                    if (x2 == 0 && y2 == 0) // tcuch screen hard code hardcode prevention debug
+                    // Lay down a single soft starting mark, including for taps.
+                    if (this.previousBrushSize <= 0) {
+                        brushSize = Math.max(minSize, Math.min(maxSize, maxSize * 0.72));
+                        this._stampBrush(Html5Paint.Resources.KasureBrushes.Small, x2, y2, brushSize);
+                        this.previousBrushSize = brushSize;
+                        this.splineBuffer.push({ x: x2, y: y2 });
                         return;
-
-                    this.splineBuffer.push({x: x2, y: y2});
-
-                    // ==== brush selection
-                    var brushUsing = Html5Paint.Resources.KasureBrushes.Small;
-
-                    if (this.splineBuffer.length > 6 && brushEnded == false) {
-                        //console.log("!");
-                        var angle = MathEx.lawOfCosine(x1, y1, x2, y2, x1, y1 - 1);
-                        //console.log(angle);
-                        if (angle >= (45 / 360) * Math.PI && angle < (135 / 360) * Math.PI)
-                            brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.A;
-                        else if (angle >= (135 / 360) * Math.PI && angle < (225 / 360) * Math.PI)
-                            brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.B;
-                        else if (angle >= (225 / 360) * Math.PI && angle < (315 / 360) * Math.PI)
-                            brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.C;
-                        else //if(angle <=45 || angle >315)
-                            brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.D;
-                        //console.log(brushUsing);
-                    }
-                    /*	*/
-
-                    // Draw Stroke part (Spline)
-                    if (this.splineBuffer.length > 3) {
-                        // ---- stroke setup
-                        var t = (new Date).getTime() - this._lastMoveTime;
-                        var distance = MathEx.distance(x1, y1, x2, y2);
-                        var velocity = distance / Math.max(1, t);
-                        var accelerate = (this.previousVelocity == 0) ? 0 : velocity / this.previousVelocity;
-
-                        var brushSize = Math.max(this.config.size.min,
-                            this.curve(velocity,
-                                this.config.size.max,
-                                (-this.config.size.max) - this.config.size.min,
-                                5 //this.velocityPressureCoff
-                            )
-                        );
-                        var segCount = 40; // spline
-                        var buffLen = this.splineBuffer.length;
-                        //console.log('buffLen=',buffLen)
-                        var points = Array.apply(null, this.splineBuffer);
-                        points = points.slice(points.length - 4);
-
-                        points.unshift(points[0]);
-                        points.push(points[points.length - 1]);
-                        // console.log(points.length,points.map(function(e){ return e.x+"," +e.y;}).join('; '));
-                        // console.log('points.length=', points.length);
-                        for (var j = 0, m = points.length - 3; j < m; j++) {
-                            var p0 = points[j];
-                            var p1 = points[j + 1];
-                            var p2 = points[j + 2];
-                            var p3 = points[j + 3];
-                            var v0 = {x: (p2.x - p0.x) / 2, y: (p2.y - p0.y) / 2, s: (p2.s - p0.s)};
-                            var v1 = {x: (p3.x - p1.x) / 2, y: (p3.y - p1.y) / 2, s: (p3.s - p1.s)};
-
-                            var tmp1 = (2 * p1.x - 2 * p2.x + v0.x + v1.x);
-                            var tmp2 = (-3 * p1.x + 3 * p2.x - 2 * v0.x - v1.x);
-                            var tmp3 = (2 * p1.y - 2 * p2.y + v0.y + v1.y);
-                            var tmp4 = (-3 * p1.y + 3 * p2.y - 2 * v0.y - v1.y);
-
-                            for (var i = 1, n = segCount + 1; i <= n; i++) {
-                                var seg = i / segCount;
-                                //console.log('i=',i)
-                                var tX = (tmp1 * Math.pow(seg, 3)) + (tmp2 * Math.pow(seg, 2)) + v0.x * seg + p1.x;
-                                var tY = (tmp3 * Math.pow(seg, 3)) + (tmp4 * Math.pow(seg, 2)) + v0.y * seg + p1.y;
-
-                                var tS = this.previousBrushSize + ((brushSize - this.previousBrushSize) / segCount) * i;
-
-                                if (this.previousBrushSize == brushSize && Math.random() < 0.3)
-                                    continue;
-
-                                this._context.drawImage(brushUsing,
-                                    tX - (tS / 2),
-                                    tY - (tS / 2),
-                                    tS,
-                                    tS);
-                            }
-                        }
-                        this.previousBrushSize = brushSize, this.already = true;
-                        points.length = 0;
                     }
 
+                    // The source texture is irregular by design. Closely spaced, deterministic dabs
+                    // preserve that dry-brush grain without the random holes of the old renderer.
+                    if (distance < 0.1) return;
+                    var angle = Math.atan2(dy, dx);
+                    if (angle >= -Math.PI / 4 && angle < Math.PI / 4)
+                        this.brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.A;
+                    else if (angle >= Math.PI / 4 && angle < Math.PI * 3 / 4)
+                        this.brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.B;
+                    else if (angle >= -Math.PI * 3 / 4 && angle < -Math.PI / 4)
+                        this.brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.D;
+                    else
+                        this.brushUsing = Html5Paint.Resources.KasureBrushesMingEdited.C;
+
+                    var spacing = Math.max(1.25, brushSize * 0.12);
+                    var steps = Math.max(1, Math.ceil(distance / spacing));
+                    var startSize = this.previousBrushSize;
+                    var image = this.brushUsing;
+                    for (var i = 1; i <= steps; i++) {
+                        var t = i / steps;
+                        var eased = t * t * (3 - 2 * t);
+                        var size = startSize + (brushSize - startSize) * eased;
+                        var x = x1 + dx * t;
+                        var y = y1 + dy * t;
+                        this._stampBrush(image, x, y, size);
+                    }
+
+                    this.previousBrushSize = brushSize;
+                    this.splineBuffer.push({ x: x2, y: y2 });
+                    if (this.splineBuffer.length > 4) this.splineBuffer.shift();
+                },
+                _stampBrush: function (image, x, y, size) {
+                    if (image && image.complete && image.naturalWidth > 0) {
+                        this._context.drawImage(image, x - size / 2, y - size / 2, size, size);
+                        return;
+                    }
+                    this._context.beginPath();
+                    this._context.arc(x, y, Math.max(1, size * 0.28), 0, Math.PI * 2);
+                    this._context.fillStyle = '#111';
+                    this._context.fill();
                 },
                 drawStrokeOld: function (x1, y1, x2, y2, brushSize, e, f) {
                     /*this._context.drawImage(Html5Paint.Resources.KasureBrushes.Small,
@@ -391,18 +354,25 @@
                             break;
                     }
                 },
+                _getCanvasPoint: function (event) {
+                    var rect = this._canvasElement.getBoundingClientRect();
+                    var scaleX = this._canvasElement.width / Math.max(1, this._canvasElement.clientWidth);
+                    var scaleY = this._canvasElement.height / Math.max(1, this._canvasElement.clientHeight);
+                    return [
+                        (event.clientX - rect.left - this._canvasElement.clientLeft) * scaleX,
+                        (event.clientY - rect.top - this._canvasElement.clientTop) * scaleY
+                    ];
+                },
                 _onDrawStart: function (a) { // == variable 'a': event == //
                     //console.log('_onDrawStart',(new Date).getTime());
                     //console.log('_onDrawStart', 'penStyle=', this.penStyle,'a=',a);
                     this.isDrawing = true;
                     a.preventDefault(), a.stopPropagation(), a.touches && (a = a.touches[0]);
                     if (this._activeTool instanceof Tool) {
-
-                        var c = a.pageX - this._canvasElement.offsetLeft,
-                            d = a.pageY - this._canvasElement.offsetTop;
+                        var point = this._getCanvasPoint(a), c = point[0], d = point[1];
 
                         this._resetMouseSmoothing(c, d),
-                            this._penStyleChanged(c - this._offset.x, d - this._offset.y, a.pageX, a.pageY),
+                            this._penStyleChanged(c, d, a.pageX, a.pageY),
                             this._activeTool.mousedown(c, d, a.pageX, a.pageY);
                         if (!this.eventBinded) {//事件尚未绑定，则绑定一次事件，否则直接跳过
 
@@ -425,9 +395,11 @@
                 },
                 _onDrawEnd: function (a) {
                     a.preventDefault(), a.stopPropagation();
+                    if (a.changedTouches && a.changedTouches.length) a = a.changedTouches[0];
                     // console.log('_onDrawEnd', 'penStyle=', this.penStyle);
                     this.isDrawing = false;
-                    var c = this._getSmoothMousePoint(a.pageX - this._canvasElement.offsetLeft, a.pageY - this._canvasElement.offsetTop);
+                    var point = this._getCanvasPoint(a);
+                    var c = this._getSmoothMousePoint(point[0], point[1]);
                     $(this._canvasElement).unbind(".Draw"), $("body").unbind(".Draw"), this._activeTool.mouseup(c[0],
                         c[1],
                         a.pageX,
@@ -440,10 +412,11 @@
                         return;
 
                     a.preventDefault(), a.stopPropagation(), a.touches && (a = a.touches[0]);
-                    var c = this._getSmoothMousePoint(a.pageX - this._canvasElement.offsetLeft, a.pageY - this._canvasElement.offsetTop);
+                    var point = this._getCanvasPoint(a);
+                    var c = this._getSmoothMousePoint(point[0], point[1]);
                     var position = {
-                        x: c[0] - this._offset.x,
-                        y: c[1] - this._offset.y
+                        x: c[0],
+                        y: c[1]
                     }
                     switch (this.penStyle) {
                         case 'pen':
