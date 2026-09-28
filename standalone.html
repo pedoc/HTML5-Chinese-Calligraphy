@@ -10,7 +10,8 @@
     *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;color:var(--ink);background:#eee9df}
     button,input{font:inherit}button{cursor:pointer}.app{max-width:1540px;min-height:100vh;margin:auto;padding:0 40px;display:flex;flex-direction:column}
     header{height:76px;flex:none;display:flex;align-items:center;gap:22px;border-bottom:1px solid #dcd5c9}.title{display:flex;align-items:center;gap:12px}.seal{width:37px;height:37px;border:1px solid #864c37;border-radius:3px;display:grid;place-items:center;color:#864c37;font-size:21px}.title h1{font-size:17px;font-weight:500;letter-spacing:.12em;margin:0}.title p{margin:4px 0 0;color:var(--muted);font:10px/1.2 system-ui,sans-serif;letter-spacing:.06em}.header-actions{margin-left:auto;display:flex;gap:7px}.button{height:35px;padding:0 12px;border:1px solid #dcd5c9;border-radius:5px;background:#f8f5ef;color:#504a40;font-size:12px;display:flex;align-items:center;gap:7px}.button:hover:not(:disabled){border-color:#ad8066;color:#75412e;background:#fffdf8}.button:disabled{opacity:.4;cursor:default}.button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:20px;padding:22px 0 18px}.paper-wrap{min-height:420px;position:relative;border:1px solid #dcd5c9;background:var(--paper);box-shadow:0 8px 26px #4035210d;overflow:hidden;touch-action:none}.paper-wrap:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E")}.paper-wrap canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.paper-note{position:absolute;z-index:2;right:14px;bottom:12px;color:#c5beb2;font:10px system-ui,sans-serif;letter-spacing:.1em;pointer-events:none}.panel{padding:17px 16px;border:1px solid #ddd6ca;background:#f7f4ee;align-self:start}.panel h2{margin:0 0 16px;font-size:13px;font-weight:500;letter-spacing:.08em}.control{display:block;padding:13px 0;border-top:1px solid #e6e0d6}.label-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px}.label-row output{color:var(--accent);font:12px system-ui,sans-serif;font-variant-numeric:tabular-nums}.control small{display:block;margin-top:4px;color:#999184;font:10px system-ui,sans-serif}.control input[type=range]{display:block;width:100%;margin:15px 0 4px;accent-color:#8e4d35}.range-ends{display:flex;justify-content:space-between;color:#aaa397;font:9px system-ui,sans-serif}.color-row{display:flex;justify-content:space-between;align-items:center}.color-row input{width:29px;height:29px;padding:2px;border:1px solid #d8d0c4;border-radius:50%;background:transparent}.color-row input::-webkit-color-swatch-wrapper{padding:0}.color-row input::-webkit-color-swatch{border:0;border-radius:50%}.tip{margin-top:14px;padding:10px;background:#eee8dd;color:#766e61;font:10px/1.6 system-ui,sans-serif}.footer{height:32px;display:flex;align-items:center;justify-content:space-between;color:#91897c;font:10px system-ui,sans-serif;letter-spacing:.04em}
-    @media(max-width:760px){.app{padding:0 16px}header{height:64px;gap:10px}.title h1{font-size:15px}.title p{font-size:9px}.button{width:35px;padding:0;justify-content:center}.button span{display:none}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto;gap:12px;padding:13px 0}.paper-wrap{min-height:42vh}.panel{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.panel h2{grid-column:1/-1;margin-bottom:5px}.control{padding:10px 0}.control:nth-of-type(4){border-top:1px solid #e6e0d6}.tip{display:none}.footer{font-size:9px}}
+    .select-control select{display:block;width:100%;height:36px;margin-top:10px;padding:0 10px;border:1px solid #d8d0c4;border-radius:4px;background:#fffdf8;color:#4d463c;font:11px system-ui,sans-serif}.select-control select:focus-visible,.button:focus-visible,.control input:focus-visible,.advanced summary:focus-visible{outline:2px solid #9b6148;outline-offset:2px}.advanced{border-top:1px solid #e6e0d6}.advanced summary{padding:14px 0;cursor:pointer;color:#5f5245;font-size:11px;list-style:none;display:flex;justify-content:space-between}.advanced summary:after{content:"＋";color:#8e4d35}.advanced[open] summary:after{content:"－"}.advanced .control:first-of-type{border-top:0}.advanced .control{padding:10px 0}.paper-control{margin-top:4px}
+    @media(max-width:760px){.app{padding:0 16px}header{height:64px;gap:10px}.title h1{font-size:15px}.title p{font-size:9px}.button{width:35px;padding:0;justify-content:center}.button span{display:none}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto;gap:12px;padding:13px 0}.paper-wrap{min-height:42vh}.panel{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.panel h2{grid-column:1/-1;margin-bottom:5px}.control{padding:10px 0}.preset-control,.advanced,.paper-control{grid-column:1/-1}.control:nth-of-type(4){border-top:1px solid #e6e0d6}.tip{display:none}.footer{font-size:9px}}
     @media(max-width:430px){.workspace{grid-template-rows:minmax(300px,1fr) auto}.panel{grid-template-columns:1fr 1fr;gap:0 12px}.label-row{font-size:10px}.control small{font-size:9px}}
   </style>
 </head>
@@ -33,11 +34,19 @@
       </div>
       <aside class="panel" aria-label="笔刷参数">
         <h2>笔刷参数</h2>
+        <label class="control select-control preset-control" for="preset"><span class="label-row">笔刷预设</span><select id="preset"><option value="balanced">均衡狼毫</option><option value="soft">柔软羊毫</option><option value="dry-brush">枯笔飞白</option><option value="line">硬毫勾线</option><option value="custom">自定义</option></select></label>
         <label class="control" for="size"><span class="label-row"><span>笔锋粗细</span><output id="size-out">32</output></span><small>运笔速度会自然影响线宽</small><input id="size" type="range" min="10" max="64" value="32"><span class="range-ends"><span>细锋</span><span>重笔</span></span></label>
         <label class="control" for="density"><span class="label-row"><span>墨色浓淡</span><output id="density-out">92%</output></span><small>控制墨迹覆盖与叠色</small><input id="density" type="range" min="45" max="100" value="92"><span class="range-ends"><span>淡</span><span>浓</span></span></label>
         <label class="control" for="dry"><span class="label-row"><span>笔锋干湿</span><output id="dry-out">28%</output></span><small>干笔丝纹与飞白程度</small><input id="dry" type="range" min="0" max="100" value="28"><span class="range-ends"><span>润</span><span>枯</span></span></label>
         <label class="control color-row" for="color"><span><span class="label-row">墨色</span><small>松烟墨</small></span><input id="color" type="color" value="#211d19" aria-label="墨色"></label>
-        <div class="tip">提按与速度共同影响笔画宽度。数位笔可提供压力；鼠标和触屏也会模拟轻重变化。</div>
+        <details class="advanced"><summary>进阶控制</summary>
+          <label class="control" for="speed"><span class="label-row"><span>速度响应</span><output id="speed-out">60%</output></span><small>快笔收细的程度</small><input id="speed" type="range" min="0" max="100" value="60"></label>
+          <label class="control" for="taper"><span class="label-row"><span>起收锋</span><output id="taper-out">70%</output></span><small>笔画首尾的尖锐程度</small><input id="taper" type="range" min="0" max="100" value="70"></label>
+          <label class="control" for="smoothing"><span class="label-row"><span>运笔平滑</span><output id="smoothing-out">35%</output></span><small>减少抖动，高值会产生跟手延迟</small><input id="smoothing" type="range" min="0" max="100" value="35"></label>
+          <label class="control" for="texture"><span class="label-row"><span>丝纹强度</span><output id="texture-out">50%</output></span><small>调整笔毫分叉与飞白细节</small><input id="texture" type="range" min="0" max="100" value="50"></label>
+        </details>
+        <label class="control select-control paper-control" for="paper-tone"><span class="label-row">纸张底色</span><select id="paper-tone"><option value="white">白宣</option><option value="warm">暖宣</option><option value="gray">灰宣</option></select></label>
+        <div class="tip">设置仅影响新笔画；数位笔可使用压力。鼠标和触屏也会模拟运笔轻重。</div>
       </aside>
     </section>
     <footer class="footer"><span id="status">按住画布即可书写</span><span>独立单文件 · 不依赖网络资源</span></footer>
@@ -54,13 +63,30 @@
       const densityInput = document.querySelector('#density');
       const dryInput = document.querySelector('#dry');
       const colorInput = document.querySelector('#color');
+      const presetInput = document.querySelector('#preset');
+      const speedInput = document.querySelector('#speed');
+      const taperInput = document.querySelector('#taper');
+      const smoothingInput = document.querySelector('#smoothing');
+      const textureInput = document.querySelector('#texture');
+      const paperToneInput = document.querySelector('#paper-tone');
       const sizeOut = document.querySelector('#size-out');
       const densityOut = document.querySelector('#density-out');
       const dryOut = document.querySelector('#dry-out');
+      const speedOut = document.querySelector('#speed-out');
+      const taperOut = document.querySelector('#taper-out');
+      const smoothingOut = document.querySelector('#smoothing-out');
+      const textureOut = document.querySelector('#texture-out');
       const count = document.querySelector('#count');
       const status = document.querySelector('#status');
       const undoButton = document.querySelector('#undo');
       const redoButton = document.querySelector('#redo');
+      const paperColors = { white: '#fffefa', warm: '#f5eedf', gray: '#e8e7e2' };
+      const presets = {
+        balanced: { size: 32, density: 92, dry: 28, speed: 60, taper: 70, smoothing: 35, texture: 50 },
+        soft: { size: 46, density: 84, dry: 12, speed: 40, taper: 40, smoothing: 60, texture: 25 },
+        'dry-brush': { size: 40, density: 78, dry: 86, speed: 74, taper: 88, smoothing: 20, texture: 90 },
+        line: { size: 16, density: 96, dry: 15, speed: 82, taper: 96, smoothing: 55, texture: 18 },
+      };
       const strokes = [];
       const undoHistory = [];
       const redoHistory = [];
@@ -147,10 +173,11 @@
         const widthAt = index => {
           const p = points[index], before = points[Math.max(0, index - 1)], after = points[Math.min(points.length - 1, index + 1)];
           const speed = Math.hypot(after.x - before.x, after.y - before.y) / Math.max(7, after.time - before.time);
-          const speedWidth = clamp(1.18 - speed * 0.18, 0.54, 1.2);
+          const speedWidth = clamp(1.12 - speed * 0.3 * stroke.speed, 0.48, 1.2);
           const pressureWidth = 0.60 + p.pressure * 0.82;
           const progress = index / (points.length - 1);
-          const taper = Math.min(1, 0.18 + progress / 0.075, 0.18 + (1 - progress) / 0.075);
+          const tip = smooth(clamp(Math.min(progress, 1 - progress) / 0.075, 0, 1));
+          const taper = lerp(1, 0.18 + 0.82 * tip, stroke.taper);
           return Math.max(1, stroke.size * speedWidth * pressureWidth * taper);
         };
         const left = [], right = [];
@@ -160,7 +187,7 @@
           const length = Math.hypot(tx, ty) || 1;
           tx /= length; ty /= length;
           const half = widthAt(i) * 0.5;
-          const edgeNoise = (random() - 0.5) * (0.35 + stroke.dry * 1.1);
+          const edgeNoise = (random() - 0.5) * (0.2 + stroke.texture * (0.4 + stroke.dry * 1.5));
           left.push({ x: p.x - ty * (half + edgeNoise), y: p.y + tx * (half + edgeNoise) });
           right.push({ x: p.x + ty * (half - edgeNoise), y: p.y - tx * (half - edgeNoise) });
         }
@@ -178,10 +205,10 @@
         context.restore();
 
         // Carved fine filaments suggest individual hairs and create restrained dry-brush fly-white.
-        const hairCount = Math.round(12 + stroke.dry * 34);
+        const hairCount = Math.round((12 + stroke.dry * 34) * stroke.texture);
         context.save();
         context.globalCompositeOperation = 'destination-out';
-        context.globalAlpha = 0.025 + stroke.dry * 0.23;
+        context.globalAlpha = (0.025 + stroke.dry * 0.23) * stroke.texture;
         context.lineCap = 'round';
         for (let hair = 0; hair < hairCount; hair++) {
           const lane = random() * 1.65 - 0.825;
@@ -225,6 +252,13 @@
           count.textContent = `${strokes.length + (active ? 1 : 0)} 笔`;
         });
       }
+      function appendPoint(event, threshold) {
+        const point = samplePoint(event), last = active.points.at(-1);
+        const follow = 1 - active.smoothing * 0.72;
+        point.x = lerp(last.x, point.x, follow);
+        point.y = lerp(last.y, point.y, follow);
+        if (Math.hypot(point.x - last.x, point.y - last.y) > threshold) active.points.push(point);
+      }
       paper.addEventListener('pointerdown', event => {
         if (pointerId !== null || (event.pointerType === 'mouse' && event.button !== 0)) return;
         event.preventDefault();
@@ -236,6 +270,10 @@
           density: Number(densityInput.value) / 100,
           dry: Number(dryInput.value) / 100,
           wet: 1 - Number(dryInput.value) / 100,
+          speed: Number(speedInput.value) / 100,
+          taper: Number(taperInput.value) / 100,
+          smoothing: Number(smoothingInput.value) / 100,
+          texture: Number(textureInput.value) / 100,
           color: colorInput.value,
           seed: seed++,
         };
@@ -246,16 +284,12 @@
         if (event.pointerId !== pointerId || !active) return;
         event.preventDefault();
         const events = event.getCoalescedEvents?.() ?? [event];
-        for (const sample of events) {
-          const point = samplePoint(sample), last = active.points.at(-1);
-          if (Math.hypot(point.x - last.x, point.y - last.y) > 0.00045) active.points.push(point);
-        }
+        for (const sample of events) appendPoint(sample, 0.00045);
         scheduleDraft();
       });
       function finish(event) {
         if (event.pointerId !== pointerId || !active) return;
-        const point = samplePoint(event), last = active.points.at(-1);
-        if (Math.hypot(point.x - last.x, point.y - last.y) > 0.0001) active.points.push(point);
+        appendPoint(event, 0.0001);
         undoHistory.push(strokes.slice());
         redoHistory.length = 0;
         strokes.push(active);
@@ -296,19 +330,40 @@
         const output = document.createElement('canvas');
         output.width = inkCanvas.width; output.height = inkCanvas.height;
         const context = output.getContext('2d');
-        context.fillStyle = '#fffefa'; context.fillRect(0, 0, output.width, output.height);
+        context.fillStyle = paperColors[paperToneInput.value]; context.fillRect(0, 0, output.width, output.height);
         context.drawImage(inkCanvas, 0, 0); context.drawImage(draftCanvas, 0, 0);
         const link = document.createElement('a');
         link.download = 'brush-writing.png'; link.href = output.toDataURL('image/png'); link.click();
       });
-      function bindRange(input, output, suffix) {
-        const update = () => { output.value = `${input.value}${suffix}`; output.textContent = output.value; };
-        input.addEventListener('input', update); update();
+      const ranges = [
+        [sizeInput, sizeOut, ''], [densityInput, densityOut, '%'], [dryInput, dryOut, '%'],
+        [speedInput, speedOut, '%'], [taperInput, taperOut, '%'],
+        [smoothingInput, smoothingOut, '%'], [textureInput, textureOut, '%'],
+      ];
+      function syncControls() {
+        for (const [input, output, suffix] of ranges) {
+          output.value = `${input.value}${suffix}`;
+          output.textContent = output.value;
+        }
+        colorInput.closest('.control').querySelector('small').textContent =
+          colorInput.value === '#211d19' ? '松烟墨' : colorInput.value;
       }
-      bindRange(sizeInput, sizeOut, '');
-      bindRange(densityInput, densityOut, '%');
-      bindRange(dryInput, dryOut, '%');
-      colorInput.addEventListener('input', () => { colorInput.closest('.control').querySelector('small').textContent = colorInput.value; });
+      for (const [input] of ranges) input.addEventListener('input', () => {
+        presetInput.value = 'custom';
+        syncControls();
+      });
+      colorInput.addEventListener('input', () => { presetInput.value = 'custom'; syncControls(); });
+      presetInput.addEventListener('change', () => {
+        const preset = presets[presetInput.value];
+        if (!preset) return;
+        for (const [name, value] of Object.entries(preset)) document.querySelector(`#${name}`).value = value;
+        colorInput.value = '#211d19';
+        syncControls();
+      });
+      paperToneInput.addEventListener('change', () => {
+        paper.style.setProperty('--paper', paperColors[paperToneInput.value]);
+      });
+      syncControls();
       new ResizeObserver(resize).observe(paper);
       window.addEventListener('resize', resize);
       resize();
