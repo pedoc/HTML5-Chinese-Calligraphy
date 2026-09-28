@@ -174,10 +174,13 @@
           const p = points[index], before = points[Math.max(0, index - 1)], after = points[Math.min(points.length - 1, index + 1)];
           const speed = Math.hypot(after.x - before.x, after.y - before.y) / Math.max(7, after.time - before.time);
           const speedWidth = clamp(1.12 - speed * 0.3 * stroke.speed, 0.48, 1.2);
-          const pressureWidth = 0.60 + p.pressure * 0.82;
+          // A low-pressure pen should leave a genuinely fine trace instead of a flat ribbon.
+          const pressureWidth = 0.20 + p.pressure * 1.54;
           const progress = index / (points.length - 1);
-          const tip = smooth(clamp(Math.min(progress, 1 - progress) / 0.075, 0, 1));
-          const taper = lerp(1, 0.18 + 0.82 * tip, stroke.taper);
+          const tip = smooth(clamp(Math.min(progress, 1 - progress) / 0.12, 0, 1));
+          // A curved response leaves the middle full, but lets the brush actually lift off at the ends.
+          const taperAmount = 1 - Math.pow(1 - stroke.taper, 2);
+          const taper = lerp(1, 0.035 + 0.965 * tip, taperAmount);
           return Math.max(1, stroke.size * speedWidth * pressureWidth * taper);
         };
         const left = [], right = [];
