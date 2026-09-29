@@ -2,25 +2,23 @@
 
 在浏览器中体验毛笔笔迹。仓库保留原有 `index.html` 原型，同时提供无需构建、可离线打开的独立版 [`standalone.html`](standalone.html)。
 
-## 独立版页面截图
+## 毛笔效果视觉参考
 
-下面是直接打开 `standalone.html` 后截取的**完整页面**。笔迹由页面本身使用模拟数位笔轨迹绘制，不是后期合成的书法图片；可对比基础预设、名家取意与纸张底色。
+以下是**生成的概念示意图**，用于展示浓墨、行笔和飞白的视觉方向；**不是本程序的实际书写截图，也不代表当前渲染器已能复现这些效果**。
 
-### 均衡狼毫 · 白宣
+### 流动的行笔与墨韵
 
-![独立版完整页面：均衡狼毫在白宣纸上绘制“大”字](docs/images/standalone-balanced.png)
+![生成的行笔墨韵概念图：流畅曲线、浓淡过渡与纤细收锋](docs/images/ink-concept-flowing.webp)
 
-### 柔软羊毫 · 暖宣
+| 浓墨与笔锋 | 枯笔飞白 |
+| :---: | :---: |
+| ![生成的浓墨笔触概念图：吸墨纸上的自然笔锋](docs/images/ink-concept-balanced.webp) | ![生成的枯笔飞白概念图：清晰的分叉笔毫和留白](docs/images/ink-concept-dry.webp) |
 
-![独立版完整页面：柔软羊毫在暖宣纸上绘制“心”字](docs/images/standalone-soft.png)
+## 实际页面
 
-### 枯笔飞白 · 灰宣
+下面是 `standalone.html` 的真实完整页面截图（空白画布）。要看目前程序能画出的笔迹，请直接打开页面试写；概念图与实际输出应分开看待。
 
-![独立版完整页面：枯笔飞白在灰宣纸上绘制“心”字，显示丝纹和飞白](docs/images/standalone-dry.png)
-
-### 米芾取意 · 行书笔性
-
-![独立版完整页面：米芾取意笔刷绘制“大”字，显示偏锋与干笔墨丝](docs/images/standalone-mi.png)
+![独立版实际页面截图：空白画布和可调笔刷参数](docs/images/standalone-ui.png)
 
 ## 使用
 
